@@ -105,6 +105,7 @@ The Kotlin FIR plugin provides language support in IntelliJ IDEA and Android Stu
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
+    <toolWindow id="FirViewer" anchor="right" factoryClass="org.jetbrains.kotlin.idea.frontend.api.fir.FirViewerToolWindowFactory"/>
     <!-- fir-specific -->
     <projectService serviceInterface="org.jetbrains.kotlin.idea.frontend.api.KtAnalysisSessionProvider"
                         serviceImplementation="org.jetbrains.kotlin.idea.frontend.api.fir.KtFirAnalysisSessionProvider"/>

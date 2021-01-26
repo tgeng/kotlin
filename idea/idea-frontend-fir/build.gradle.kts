@@ -35,6 +35,7 @@ dependencies {
     testCompile(projectTests(":idea:idea-frontend-independent"))
 
     compile(intellijPluginDep("java"))
+    implementation(kotlin("reflect"))
 }
 
 sourceSets {
