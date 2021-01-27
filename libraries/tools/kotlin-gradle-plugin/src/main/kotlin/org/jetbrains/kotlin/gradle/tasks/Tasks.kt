@@ -642,7 +642,7 @@ open class Kotlin2JsCompile : AbstractKotlinCompile<K2JSCompilerArguments>(), Ko
 
     @get:Internal
     val outputFile: File
-        get() = outputFilePath?.let(::File) ?: defaultOutputFile
+        get() = kotlinOptions.outputFile?.let(::File) ?: defaultOutputFile
 
     @get:OutputFile
     @get:Optional
@@ -654,10 +654,6 @@ open class Kotlin2JsCompile : AbstractKotlinCompile<K2JSCompilerArguments>(), Ko
                 null
             }
         }
-
-    @get:Input
-    val outputFilePath: String?
-        get() = kotlinOptions.outputFile
 
     override fun findKotlinCompilerClasspath(project: Project): List<File> =
         findKotlinJsCompilerClasspath(project)
