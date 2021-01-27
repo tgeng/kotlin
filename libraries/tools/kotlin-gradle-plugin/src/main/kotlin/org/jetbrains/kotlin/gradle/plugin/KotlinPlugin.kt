@@ -262,8 +262,13 @@ internal class Kotlin2JsSourceSetProcessor(
         // outputFile can be set later during the configuration phase, get it only after the phase:
         project.whenEvaluated {
             kotlinTask.configure { kotlinTaskInstance ->
-                kotlinTaskInstance.kotlinOptions.outputFile = kotlinTaskInstance.outputFile.absolutePath
-                val outputDir = kotlinTaskInstance.outputFile.parentFile
+                val kotlinOptions = kotlinTaskInstance.kotlinOptions
+                val outputDir: File = kotlinTaskInstance.outputFile.parentFile
+                kotlinOptions.outputFile = if (!kotlinOptions.isProduceUnzippedKlib()) {
+                    kotlinTaskInstance.outputFile.absolutePath
+                } else {
+                    kotlinTaskInstance.outputFile.parentFile.absolutePath
+                }
                 if (outputDir.isParentOf(project.rootDir))
                     throw InvalidUserDataException(
                         "The output directory '$outputDir' (defined by outputFile of $kotlinTaskInstance) contains or " +
